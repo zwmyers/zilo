@@ -77,6 +77,7 @@ int get_window_size(int *rows, int *cols);
 //row operations
 
 int editor_row_cx_to_rx(erow *row, int cx);
+int editor_row_rx_to_cx(erow *row, int rx);
 void editor_update_row(erow *row);
 void editor_insert_row(int at, char *s, size_t len);
 void editor_free_row(erow *row);
@@ -97,6 +98,11 @@ char *editor_rows_to_string(int *buflen);
 void editor_open(char *filename);
 void editor_save(void);
 
+//search
+
+void editor_search_callback(char *query, int key);
+void editor_search(void);
+
 //append buffer
 
 void ab_append(abuf *ab, const char *s, int len);
@@ -112,7 +118,7 @@ void editor_set_status_message(const char *fmt, ...);
 
 //input
 
-char *editor_prompt(char *prompt);
+char *editor_prompt(char *prompt, void (*callback)(char *, int));
 void editor_move_cursor(int key);
 void editor_process_keypress(void);
 
